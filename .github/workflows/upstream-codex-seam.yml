@@ -16,6 +16,8 @@ permissions:
 
 env:
   CODEX_COMMIT: 9fc715c0861c956c894a91890b78dc05b304ba29
+  CMV_PYTHON: python3
+  CMV_REPOSITORY_ROOT: ${{ github.workspace }}
 
 jobs:
   import-preflight-seam:
@@ -53,6 +55,10 @@ jobs:
       - name: Prove failed preflight preserves the previous import
         working-directory: upstream/codex-rs
         run: cargo test -p codex-external-agent-migration --lib preflight_failure_preserves_previous_imported_project
+
+      - name: Prove Canonical Memory conformance through the seam
+        working-directory: upstream/codex-rs
+        run: cargo test -p codex-external-agent-migration --lib canonical_verifier_
 
       - name: Prove ordinary Markdown compatibility
         working-directory: upstream/codex-rs

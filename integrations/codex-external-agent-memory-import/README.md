@@ -18,8 +18,9 @@ prepared but before a previous imported project is removed?
 
 The patch factors the existing replacement function around a preflight callback.
 The default callback accepts ordinary Markdown, so the current compatibility path
-is unchanged. The added test supplies a rejecting callback and proves that the
-previous `MEMORY.md` and `scope.json` remain byte-identical after rejection.
+is unchanged. The tests pass actual synthetic bundles through `cmverify`, return
+the stable conformance digest for a valid bundle, and prove that the previous
+`MEMORY.md` and `scope.json` remain byte-identical after rejection.
 
 The callback is intentionally not exposed as a proposed final public API. This
 experiment establishes the mutation boundary first; verifier ownership, error
@@ -34,8 +35,10 @@ Ubuntu runner:
 2. checks out `openai/codex` at the exact commit above;
 3. checks the patch before applying it;
 4. verifies Rust formatting;
-5. runs the new fail-closed preservation test; and
-6. runs the existing ordinary Markdown import test as a compatibility control.
+5. runs the generic fail-closed preservation test;
+6. runs the real verifier adapter cases for valid, tampered, ambiguous, expired
+   authority, and unexpired authority bundles; and
+7. runs the existing ordinary Markdown import test as a compatibility control.
 
 Equivalent commands after both repositories are checked out side by side:
 
@@ -45,6 +48,7 @@ git -C upstream apply ../canonical-memory-verifier/integrations/codex-external-a
 cd upstream/codex-rs
 cargo fmt --all -- --check
 cargo test -p codex-external-agent-migration --lib preflight_failure_preserves_previous_imported_project
+cargo test -p codex-external-agent-migration --lib canonical_verifier_
 cargo test -p codex-external-agent-migration --lib copies_only_selected_projects_and_recopies_changed_content
 ```
 
@@ -53,6 +57,8 @@ cargo test -p codex-external-agent-migration --lib copies_only_selected_projects
 - the seam applies to the pinned source revision;
 - a rejecting verifier can fail before destructive replacement;
 - the previous imported project is preserved on preflight failure; and
+- a valid bundle returns the same stable conformance digest through the seam;
+- tamper, ambiguity, and both authority-eligibility violations fail closed; and
 - the ordinary Markdown control still executes through the default path.
 
 It does not prove that Codex accepts the Canonical Memory contract, that this is

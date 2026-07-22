@@ -40,7 +40,9 @@ class UpstreamReproductionTests(unittest.TestCase):
 
     def test_preflight_precedes_destructive_replacement(self) -> None:
         text = PATCH.read_text(encoding="utf-8")
-        preflight = text.index("+    preflight(project_key, project_cwd, &source_files)?;")
+        preflight = text.index(
+            "+    let conformance_digest = preflight(project_key, project_cwd, &source_files)?;"
+        )
         removal = text.index("     remove_project_resources(codex_home, project_key)?;")
         self.assertLess(preflight, removal)
 
@@ -50,6 +52,20 @@ class UpstreamReproductionTests(unittest.TestCase):
         self.assertIn("CMV_SOURCE_HASH_MISMATCH", text)
         self.assertIn('b"previous verified memory"', text)
         self.assertIn("read preserved scope", text)
+
+    def test_real_verifier_cases_are_wired_through_the_seam(self) -> None:
+        text = PATCH.read_text(encoding="utf-8")
+        self.assertIn("canonical_verifier_accepts_valid_bundle_with_stable_digest", text)
+        self.assertIn("canonical_verifier_rejections_preserve_previous_import", text)
+        for fixture in (
+            "valid/basic",
+            "invalid/source-tampered",
+            "invalid/ambiguous-heads",
+            "invalid/approval-true-expired",
+            "invalid/approval-true-unexpired",
+        ):
+            self.assertIn(fixture, text)
+        self.assertIn("conformance_sha256", text)
 
 
 if __name__ == "__main__":
