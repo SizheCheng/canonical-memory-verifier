@@ -1,0 +1,32 @@
+{
+  "name": "canonical-memory-verifier",
+  "version": "0.1.0",
+  "description": "Deterministic conformance checks for explicitly selected external memory bundles.",
+  "author": {
+    "name": "Sizhe Cheng",
+    "url": "https://github.com/SizheCheng"
+  },
+  "license": "Apache-2.0",
+  "keywords": [
+    "agent-memory",
+    "provenance",
+    "supersession",
+    "verification"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Canonical Memory Verifier",
+    "shortDescription": "Verify imported memory before an agent relies on it.",
+    "longDescription": "A local, read-only verifier for source integrity, explicit supersession, deterministic current projection, declared source-reference tracing, and remembered-authority boundaries.",
+    "developerName": "Sizhe Cheng",
+    "category": "Developer Tools",
+    "capabilities": [
+      "Read"
+    ],
+    "defaultPrompt": [
+      "Verify this external memory bundle before use.",
+      "Trace this current claim to its sources.",
+      "Check this bundle for remembered-authority replay."
+    ]
+  }
+}

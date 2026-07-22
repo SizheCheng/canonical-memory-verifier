@@ -1,0 +1,28 @@
+{
+  "schema_version": "0.1.0",
+  "bundle_kind": "imported_memory",
+  "bundle_id": "bnd_basic",
+  "scope": "repo:synthetic-example",
+  "sources": [
+    {
+      "source_id": "src_target",
+      "path": "sources/target.txt",
+      "media_type": "text/plain",
+      "bytes": 45,
+      "sha256": "56dea8030470c4000e35dfb8bf2853588e574e6553b2e527a7bd8e7ed72cd1fe"
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "clm_target",
+      "key": "deployment.target",
+      "claim_type": "fact",
+      "value": "staging",
+      "source_refs": [
+        "src_target"
+      ],
+      "approval_eligible": false
+    }
+  ],
+  "supersessions": []
+}

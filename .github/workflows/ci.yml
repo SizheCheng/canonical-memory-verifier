@@ -1,0 +1,36 @@
+name: conformance
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: ${{ matrix.os }} / Python ${{ matrix.python-version }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        python-version: ["3.10", "3.13"]
+    env:
+      PYTHONDONTWRITEBYTECODE: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Check deterministic fixtures
+        run: python tools/generate_synthetic_fixtures.py --check
+      - name: Run conformance tests
+        run: python -m unittest discover -s tests -p "test_*.py" -v
+      - name: Scan the public boundary
+        run: python tools/scan_public_boundary.py
+      - name: Check the byte-bound public manifest
+        run: python tools/build_public_manifest.py --check
+      - name: Build the deterministic review ZIP
+        run: python tools/build_candidate_zip.py --output ../canonical-memory-verifier-review.zip

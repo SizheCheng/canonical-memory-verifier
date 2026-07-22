@@ -1,0 +1,165 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/canonical-memory/0.1/bundle.schema.json",
+  "title": "Canonical Memory Conformance Bundle 0.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "bundle_kind",
+    "bundle_id",
+    "scope",
+    "sources",
+    "claims",
+    "supersessions"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0"
+    },
+    "bundle_kind": {
+      "const": "imported_memory"
+    },
+    "bundle_id": {
+      "type": "string",
+      "pattern": "^bnd_[a-z0-9][a-z0-9._-]{0,63}$"
+    },
+    "scope": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9._:/-]{0,127}$"
+    },
+    "sources": {
+      "type": "array",
+      "maxItems": 1000,
+      "items": {
+        "$ref": "#/$defs/source"
+      }
+    },
+    "claims": {
+      "type": "array",
+      "maxItems": 1000,
+      "items": {
+        "$ref": "#/$defs/claim"
+      }
+    },
+    "supersessions": {
+      "type": "array",
+      "maxItems": 1000,
+      "items": {
+        "$ref": "#/$defs/edge"
+      }
+    }
+  },
+  "$defs": {
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_id",
+        "path",
+        "media_type",
+        "bytes",
+        "sha256"
+      ],
+      "properties": {
+        "source_id": {
+          "type": "string",
+          "pattern": "^src_[a-z0-9][a-z0-9._-]{0,63}$"
+        },
+        "path": {
+          "type": "string",
+          "pattern": "^sources/[a-z0-9][a-z0-9._-]{0,127}$"
+        },
+        "media_type": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "bytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 262144
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    },
+    "claim": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "claim_id",
+        "key",
+        "claim_type",
+        "value",
+        "source_refs",
+        "approval_eligible"
+      ],
+      "properties": {
+        "claim_id": {
+          "type": "string",
+          "pattern": "^clm_[a-z0-9][a-z0-9._-]{0,63}$"
+        },
+        "key": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9._-]{0,127}$"
+        },
+        "claim_type": {
+          "enum": [
+            "fact",
+            "historical_authority"
+          ]
+        },
+        "value": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 65536
+        },
+        "source_refs": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 100,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^src_[a-z0-9][a-z0-9._-]{0,63}$"
+          }
+        },
+        "approval_eligible": {
+          "const": false
+        }
+      }
+    },
+    "edge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "edge_id",
+        "superseded_claim_id",
+        "superseding_claim_id",
+        "reason"
+      ],
+      "properties": {
+        "edge_id": {
+          "type": "string",
+          "pattern": "^sup_[a-z0-9][a-z0-9._-]{0,63}$"
+        },
+        "superseded_claim_id": {
+          "type": "string",
+          "pattern": "^clm_[a-z0-9][a-z0-9._-]{0,63}$"
+        },
+        "superseding_claim_id": {
+          "type": "string",
+          "pattern": "^clm_[a-z0-9][a-z0-9._-]{0,63}$"
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512
+        }
+      }
+    }
+  }
+}
