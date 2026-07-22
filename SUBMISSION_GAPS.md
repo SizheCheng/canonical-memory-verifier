@@ -47,14 +47,16 @@ These are project readiness choices, not claims about mandatory portal fields:
 
 ## Upstream Codex evidence gap
 
-The current demo proves only how this verifier behaves. It does not reproduce a
-Codex defect, identify a live Codex import seam, or compare Codex behavior with a
-baseline. `UPSTREAM_ISSUE_DRAFT.md` is therefore not ready to post.
+A live import seam has now been verified in public `openai/codex` source at
+commit `9fc715c0861c956c894a91890b78dc05b304ba29`. The feature is under development
+and disabled by default. The current demo still proves only how this verifier
+behaves; it has not yet been integrated with or tested against that Rust import
+boundary. `UPSTREAM_ISSUE_DRAFT.md` is therefore still not ready to post.
 
 Before upstream contact:
 
-- locate and version-pin a real upstream import boundary;
-- build a minimal reproduction and ordinary-summary or retrieval baseline;
+- build a minimal reproduction at the pinned import boundary and retain the
+  ordinary Markdown path as the compatibility baseline;
 - distinguish observed behavior from proposed invariant;
 - publish a reproducible artifact only with separate authorization;
 - begin with an issue or discussion, not an unsolicited pull request;
