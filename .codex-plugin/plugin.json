@@ -6,6 +6,8 @@
     "name": "Sizhe Cheng",
     "url": "https://github.com/SizheCheng"
   },
+  "homepage": "https://github.com/SizheCheng/canonical-memory-verifier",
+  "repository": "https://github.com/SizheCheng/canonical-memory-verifier",
   "license": "Apache-2.0",
   "keywords": [
     "agent-memory",
@@ -23,6 +25,9 @@
     "capabilities": [
       "Read"
     ],
+    "websiteURL": "https://github.com/SizheCheng/canonical-memory-verifier",
+    "privacyPolicyURL": "https://github.com/SizheCheng/canonical-memory-verifier/blob/main/PRIVACY.md",
+    "termsOfServiceURL": "https://github.com/SizheCheng/canonical-memory-verifier/blob/main/TERMS.md",
     "defaultPrompt": [
       "Verify this external memory bundle before use.",
       "Trace this current claim to its sources.",

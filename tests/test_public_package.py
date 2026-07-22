@@ -27,7 +27,12 @@ class PublicPackageTests(unittest.TestCase):
     def test_current_manifest_is_strict_and_publishable(self) -> None:
         parsed = PACKAGE.load_and_validate_manifest(PUBLIC_MANIFEST.read_bytes())
         self.assertEqual(parsed["release_status"], "candidate_licensed_not_published")
-        paths = {item["path"] for item in parsed["files"]}
+        ordered_paths = [item["path"] for item in parsed["files"]]
+        self.assertEqual(
+            ordered_paths,
+            sorted(ordered_paths, key=lambda path: path.encode("utf-8")),
+        )
+        paths = set(ordered_paths)
         self.assertIn("LICENSE", paths)
         self.assertIn(".github/workflows/ci.yml", paths)
 

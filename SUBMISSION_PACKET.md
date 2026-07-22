@@ -17,12 +17,13 @@ authorization to submit.
   supersession, deterministic current projection, declared source-reference
   tracing, and remembered-authority boundaries.
 - License: Apache-2.0
+- Website: https://github.com/SizheCheng/canonical-memory-verifier
+- Support: https://github.com/SizheCheng/canonical-memory-verifier/issues
+- Privacy: https://github.com/SizheCheng/canonical-memory-verifier/blob/main/PRIVACY.md
+- Terms: https://github.com/SizheCheng/canonical-memory-verifier/blob/main/TERMS.md
 
-The website, support, privacy, and terms fields must use live HTTPS URLs under
-the same publisher identity. The matching source documents are `README.md`,
-`SUPPORT.md`, `PRIVACY.md`, and `TERMS.md`; no URL should be entered until those
-documents are publicly reachable. A final production-ready logo is also still
-required.
+These live HTTPS URLs are hosted in the public repository under the matching
+publisher identity. A final production-ready logo is still required.
 
 ## Skills bundle
 

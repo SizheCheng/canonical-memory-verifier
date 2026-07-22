@@ -84,9 +84,11 @@ and [SUBMISSION_PACKET.md](SUBMISSION_PACKET.md).
 
 ## Public-review status
 
-The local code, license, publisher metadata, cross-platform CI definition,
-reviewer cases, privacy policy, terms, support policy, and deterministic package
-builder are present. Public repository creation, live public URLs, final listing
-art, an independent clean-checkout reproduction, and submission through the
+The source is public at
+<https://github.com/SizheCheng/canonical-memory-verifier>. The code, license,
+publisher metadata, reviewer cases, privacy policy, terms, support policy, and
+deterministic package builder are present. Cross-platform CI must be green on
+the exact public head before a submission ZIP is prepared. Final listing art,
+an independent human clean-checkout reproduction, and submission through the
 OpenAI portal remain external gates. No file in this repository authorizes
-publishing or submitting it.
+submitting it.

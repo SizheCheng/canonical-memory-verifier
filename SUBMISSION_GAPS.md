@@ -13,6 +13,8 @@ The local candidate is not yet ready for public submission.
   tests;
 - one OpenClaw `main` model-assisted code review, followed by local remediation.
 - Apache-2.0 license and individual publisher metadata for Sizhe Cheng;
+- clean public source repository under the matching GitHub identity;
+- live website, support, privacy, and terms URLs under that repository;
 - Windows, macOS, and Linux CI definition for Python 3.10 and 3.13;
 - local privacy, terms, support, security, and publisher documents;
 - strict validation of the public packaging manifest, including malicious
@@ -37,9 +39,8 @@ Publisher metadata and the final OpenAI submission must use that exact identity.
 
 These are project readiness choices, not claims about mandatory portal fields:
 
-- create a clean public repository without private history;
-- publish durable website, support, privacy, and terms URLs under the same
-  individual identity;
+- obtain a fully green public Windows, macOS, and Linux CI run on the exact
+  candidate head;
 - have a human reviewer reproduce the commands from a clean checkout;
 - finalize listing logo and confirm the prepared starter prompts;
 - inspect a final allowlisted ZIP and rerun current official checks;

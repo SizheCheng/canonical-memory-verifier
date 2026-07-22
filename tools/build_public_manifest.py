@@ -38,7 +38,11 @@ def is_reparse(path: Path) -> bool:
 
 def build() -> dict:
     files = []
-    for path in sorted(ROOT.rglob("*")):
+    candidates = sorted(
+        ROOT.rglob("*"),
+        key=lambda candidate: candidate.relative_to(ROOT).as_posix().encode("utf-8"),
+    )
+    for path in candidates:
         relative_parts = path.relative_to(ROOT).parts
         if any(part in IGNORED_DIRECTORY_NAMES for part in relative_parts):
             continue
