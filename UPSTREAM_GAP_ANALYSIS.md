@@ -73,19 +73,19 @@ whole Python plugin and not the private Canonical Memories vault.
 
 The repository now contains a version-pinned patch and dedicated CI workflow at
 `integrations/codex-external-agent-memory-import/`. The patch prepares all
-candidate source bytes, calls a test preflight, and only then reaches the
-existing destructive replacement. Its focused negative test rejects the
-candidate and verifies that the previous `MEMORY.md` and `scope.json` remain
-byte-identical. The existing ordinary Markdown importer test is retained as a
-compatibility control.
+candidate source bytes, calls a preflight, and only then reaches the existing
+destructive replacement. Its focused negative test verifies mutation order; its
+adapter tests call the real verifier for valid, tampered, ambiguous, and both
+authority-eligibility cases. The existing ordinary Markdown importer test is
+retained as a compatibility control.
 
-This closes only the mutation-order question. It deliberately does not expose a
-final upstream API or port the Python verifier into Codex.
+The experiment deliberately invokes the clean-room Python verifier rather than
+pretending that a final upstream Rust API or implementation has been selected.
 
-## Full contract reproduction still required
+## Full experimental contract reproduction
 
-Before posting an issue or discussion, build a version-pinned upstream test that
-demonstrates all of the following without modifying current default behavior:
+The experimental gate required a version-pinned upstream test that demonstrates
+all of the following without modifying current default behavior:
 
 - ordinary Markdown import remains compatible when no bundle is present;
 - a valid bundle imports successfully and returns a stable digest;
@@ -95,7 +95,12 @@ demonstrates all of the following without modifying current default behavior:
   `approval_eligible: true` fail identically;
 - the prior imported project remains intact after a failed preflight.
 
-The narrow workflow covers ordinary compatibility and preservation after a
-generic preflight rejection. The bundle-aware digest, tamper, ambiguity, and
-authority cases remain to be wired through a real adapter before this can be
-called a completed contract reproduction or posted as an upstream proposal.
+The workflow now covers every item above through a test adapter: ordinary
+compatibility, stable successful digest, source tamper, ambiguous heads, both
+authority-eligibility cases, and prior-copy preservation. The green exact-run
+evidence is recorded in `UPSTREAM_REPRODUCTION_EVIDENCE.md`.
+
+This completes the experimental reproduction, not the production integration.
+Bundle discovery, verifier ownership, persisted attestation shape, stable host
+errors, and service wiring remain upstream design questions. No upstream contact
+has occurred.

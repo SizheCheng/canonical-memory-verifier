@@ -18,14 +18,15 @@ selections, portal completion, and OpenAI review.
 
 ## Gate 2: upstream technical adoption
 
-The first version-pinned seam experiment now exists at the actual Codex import
-boundary. It tests fail-before-replace preservation and ordinary Markdown
-compatibility against one exact public commit. The next technical gate is a
-bundle-aware adapter that carries the verifier's stable digest and exact failure
-classes through that seam. The likely upstream unit remains a test, fixture, or
-import-boundary rule—not this entire application. Start external discussion only
-after that evidence exists; prepare upstream production code only when
-maintainers invite or request it.
+The version-pinned experiment now passes at the actual Codex import boundary.
+It carries a real stable verifier digest and the tamper, ambiguity, expired
+authority, and unexpired authority failure classes through the seam while
+preserving ordinary Markdown compatibility and the prior imported copy. The
+next gate is independent reproduction and a focused maintainer discussion about
+the production contract: discovery, verifier ownership, attestation, errors,
+and service wiring. The likely upstream unit remains a test, fixture, or
+import-boundary rule—not this entire application. Prepare upstream production
+code only when maintainers invite or request it.
 
 ## Gate 3: collaboration, employment, or acquisition
 

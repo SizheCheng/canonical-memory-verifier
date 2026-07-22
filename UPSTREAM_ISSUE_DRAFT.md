@@ -1,9 +1,10 @@
 # Upstream issue draft
 
-Status: **EXECUTABLE SEAM CANDIDATE; NOT READY TO POST**. The public Codex source
-contains a real external-memory import seam. A version-pinned patch now tests
-fail-before-replace ordering and ordinary Markdown compatibility, but the full
-bundle-aware conformance adapter has not been implemented or validated.
+Status: **VERSION-PINNED REPRODUCTION GREEN; NOT AUTHORIZED TO POST**. The public
+Codex source contains a real external-memory import seam. A clean CI run now
+passes fail-before-replace ordering, stable verifier digest, tamper, ambiguity,
+both historical-authority cases, and ordinary Markdown compatibility against an
+exact upstream commit.
 
 Proposed title:
 
@@ -74,14 +75,15 @@ bytes are prepared and before old imported resources are removed. A rejecting
 preflight must preserve the previous `MEMORY.md` and `scope.json`. The existing
 ordinary Markdown importer test is run as the compatibility control.
 
-This proves the mutation boundary, not the full contract.
+The exact run and patch identities are recorded in
+`UPSTREAM_REPRODUCTION_EVIDENCE.md`. This proves an experimental adapter at the
+mutation boundary, not a final production API.
 
 ## Required before posting
 
-Before posting, wire a real bundle-aware adapter through the seam and prove a
-stable successful digest plus tamper, ambiguity, and authority-eligibility
-rejection with the prior imported copy preserved. Record a green run against
-the pinned upstream commit and have an independent reviewer reproduce it.
+Before posting, have an independent reviewer reproduce the exact clean-checkout
+route and recheck the issue text against the then-current upstream source and
+contribution guidance. Posting still requires separate current authorization.
 
 ## Question for maintainers
 

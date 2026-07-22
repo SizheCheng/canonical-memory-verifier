@@ -99,6 +99,9 @@ Validated light, dark, and composer branding assets are included. An independent
 human clean-checkout reproduction and submission through the OpenAI portal
 remain external gates. A separate workflow applies a narrow fail-before-replace
 patch to an exact public Codex commit and runs both a preservation test and the
-ordinary Markdown compatibility control. That experiment is not an upstream
-contribution or OpenAI endorsement. No file in this repository authorizes
-submitting it or contacting maintainers.
+ordinary Markdown compatibility control. It also passes the real verifier's
+valid digest, tamper, ambiguous-head, and two authority-eligibility cases through
+that seam. See [UPSTREAM_REPRODUCTION_EVIDENCE.md](UPSTREAM_REPRODUCTION_EVIDENCE.md)
+for exact commits, hashes, run URLs, failures, and limits. The experiment is not
+an upstream contribution or OpenAI endorsement. No file in this repository
+authorizes submitting it or contacting maintainers.
