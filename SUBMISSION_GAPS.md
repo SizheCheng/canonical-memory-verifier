@@ -50,14 +50,17 @@ These are project readiness choices, not claims about mandatory portal fields:
 
 A live import seam has now been verified in public `openai/codex` source at
 commit `9fc715c0861c956c894a91890b78dc05b304ba29`. The feature is under development
-and disabled by default. The current demo still proves only how this verifier
-behaves; it has not yet been integrated with or tested against that Rust import
-boundary. `UPSTREAM_ISSUE_DRAFT.md` is therefore still not ready to post.
+and disabled by default. A narrow version-pinned patch now exercises the Rust
+mutation boundary: generic preflight rejection occurs before replacement, and
+the prior imported project remains intact. It also runs the existing ordinary
+Markdown import as a compatibility control. The full verifier contract has not
+yet been wired into that boundary, so `UPSTREAM_ISSUE_DRAFT.md` is still not
+ready to post.
 
 Before upstream contact:
 
-- build a minimal reproduction at the pinned import boundary and retain the
-  ordinary Markdown path as the compatibility baseline;
+- complete the bundle-aware adapter at the pinned import boundary and retain
+  the ordinary Markdown path as the compatibility baseline;
 - distinguish observed behavior from proposed invariant;
 - publish a reproducible artifact only with separate authorization;
 - begin with an issue or discussion, not an unsolicited pull request;

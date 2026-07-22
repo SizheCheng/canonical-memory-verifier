@@ -1,8 +1,9 @@
 # Upstream issue draft
 
-Status: **SEAM VERIFIED; NOT READY TO POST**. The public Codex source contains a
-real external-memory import seam, but the optional conformance integration and
-version-pinned upstream tests have not yet been implemented or run.
+Status: **EXECUTABLE SEAM CANDIDATE; NOT READY TO POST**. The public Codex source
+contains a real external-memory import seam. A version-pinned patch now tests
+fail-before-replace ordering and ordinary Markdown compatibility, but the full
+bundle-aware conformance adapter has not been implemented or validated.
 
 Proposed title:
 
@@ -65,13 +66,22 @@ The implementation is standard-library-only, offline, deterministic, and uses
 only synthetic data. This demonstrates the proposed invariant in the candidate;
 it is not evidence that Codex currently violates or implements the invariant.
 
-## Required upstream reproduction
+## Current upstream reproduction
 
-Before posting, add a version-pinned test at the actual importer boundary that
-keeps ordinary Markdown behavior unchanged when no conformance bundle exists,
-then proves valid import, tamper rejection, ambiguity rejection,
-authority-eligibility rejection, and preservation of the prior imported copy
-after failed preflight.
+`integrations/codex-external-agent-memory-import/` contains an exact-commit patch
+and a dedicated CI workflow. The patch invokes a test preflight after all source
+bytes are prepared and before old imported resources are removed. A rejecting
+preflight must preserve the previous `MEMORY.md` and `scope.json`. The existing
+ordinary Markdown importer test is run as the compatibility control.
+
+This proves the mutation boundary, not the full contract.
+
+## Required before posting
+
+Before posting, wire a real bundle-aware adapter through the seam and prove a
+stable successful digest plus tamper, ambiguity, and authority-eligibility
+rejection with the prior imported copy preserved. Record a green run against
+the pinned upstream commit and have an independent reviewer reproduce it.
 
 ## Question for maintainers
 

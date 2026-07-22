@@ -1,0 +1,142 @@
+diff --git a/codex-rs/external-agent-migration/src/memory_import.rs b/codex-rs/external-agent-migration/src/memory_import.rs
+index 92c38aa..e13538d 100644
+--- a/codex-rs/external-agent-migration/src/memory_import.rs
++++ b/codex-rs/external-agent-migration/src/memory_import.rs
+@@ -50,6 +50,12 @@ struct ProjectScope<'a> {
+     cwd: &'a Path,
+ }
+ 
++#[derive(Debug, PartialEq, Eq)]
++struct PreparedMemoryFile {
++    relative_path: PathBuf,
++    content: Vec<u8>,
++}
++
+ pub(super) async fn import(
+     codex_home: &Path,
+     external_agent_home: &Path,
+@@ -283,22 +289,46 @@ fn replace_project_resources(
+     project_key: &str,
+     project_cwd: &Path,
+     memory_files: &[&ExternalMemoryFile],
++) -> io::Result<()> {
++    replace_project_resources_with_preflight(
++        codex_home,
++        project_key,
++        project_cwd,
++        memory_files,
++        |_, _, _| Ok(()),
++    )
++}
++
++fn replace_project_resources_with_preflight(
++    codex_home: &Path,
++    project_key: &str,
++    project_cwd: &Path,
++    memory_files: &[&ExternalMemoryFile],
++    preflight: impl FnOnce(&str, &Path, &[PreparedMemoryFile]) -> io::Result<()>,
+ ) -> io::Result<()> {
+     let source_files = memory_files
+         .iter()
+         .map(|memory_file| {
+             fs::read(&memory_file.source_path)
+-                .map(|content| (memory_file.relative_path.clone(), content))
++                .map(|content| PreparedMemoryFile {
++                    relative_path: memory_file.relative_path.clone(),
++                    content,
++                })
+         })
+         .collect::<io::Result<Vec<_>>>()?;
+     let scope_content = project_scope_content(project_cwd)?;
+ 
++    // A verifier is deliberately called after every source byte is prepared but
++    // before the previous imported project is removed. This keeps ordinary
++    // Markdown imports unchanged while providing a fail-closed integration seam.
++    preflight(project_key, project_cwd, &source_files)?;
++
+     remove_project_resources(codex_home, project_key)?;
+     let target_root = resources_root(codex_home).join(project_key);
+     fs::create_dir_all(&target_root)?;
+     fs::write(target_root.join(PROJECT_SCOPE_FILE), scope_content)?;
+-    for (relative_path, content) in source_files {
+-        let target_path = target_root.join(relative_path);
++    for source_file in source_files {
++        let target_path = target_root.join(source_file.relative_path);
+         let target_parent = target_path.parent().ok_or_else(|| {
+             invalid_data_error(format!(
+                 "memory target path has no parent: {}",
+@@ -306,7 +336,7 @@ fn replace_project_resources(
+             ))
+         })?;
+         fs::create_dir_all(target_parent)?;
+-        fs::write(target_path, content)?;
++        fs::write(target_path, source_file.content)?;
+     }
+     Ok(())
+ }
+diff --git a/codex-rs/external-agent-migration/src/memory_import_tests.rs b/codex-rs/external-agent-migration/src/memory_import_tests.rs
+index 9bf57f3..c56c565 100644
+--- a/codex-rs/external-agent-migration/src/memory_import_tests.rs
++++ b/codex-rs/external-agent-migration/src/memory_import_tests.rs
+@@ -333,3 +333,61 @@ fn removes_an_existing_unscoped_target_when_cwd_is_unavailable() {
+     );
+     assert!(!target_root.exists());
+ }
++
++#[test]
++fn preflight_failure_preserves_previous_imported_project() {
++    let root = TempDir::new().expect("create tempdir");
++    let codex_home = root.path().join(".codex");
++    let project_cwd = root.path().join("project-a-cwd");
++    fs::create_dir_all(&project_cwd).expect("create project cwd");
++
++    let target_root = resources_root(&codex_home).join("project-a");
++    fs::create_dir_all(&target_root).expect("create previous imported project");
++    fs::write(target_root.join("MEMORY.md"), b"previous verified memory")
++        .expect("write previous memory");
++    fs::write(
++        target_root.join(PROJECT_SCOPE_FILE),
++        project_scope_content(&project_cwd).expect("serialize project scope"),
++    )
++    .expect("write previous scope");
++
++    let source_path = root.path().join("candidate-MEMORY.md");
++    fs::write(&source_path, b"candidate memory").expect("write candidate memory");
++    let memory_file = ExternalMemoryFile {
++        project_key: "project-a".to_string(),
++        project_cwd: Some(project_cwd.clone()),
++        source_path,
++        relative_path: PathBuf::from("MEMORY.md"),
++    };
++
++    let error = replace_project_resources_with_preflight(
++        &codex_home,
++        "project-a",
++        &project_cwd,
++        &[&memory_file],
++        |project_key, checked_cwd, prepared_files| {
++            assert_eq!(project_key, "project-a");
++            assert_eq!(checked_cwd, project_cwd);
++            assert_eq!(
++                prepared_files,
++                &[PreparedMemoryFile {
++                    relative_path: PathBuf::from("MEMORY.md"),
++                    content: b"candidate memory".to_vec(),
++                }]
++            );
++            Err(invalid_data_error("CMV_SOURCE_HASH_MISMATCH"))
++        },
++    )
++    .expect_err("reject invalid candidate before replacement");
++
++    assert_eq!(error.kind(), io::ErrorKind::InvalidData);
++    assert_eq!(error.to_string(), "CMV_SOURCE_HASH_MISMATCH");
++    assert_eq!(
++        fs::read(target_root.join("MEMORY.md")).expect("read preserved memory"),
++        b"previous verified memory"
++    );
++    assert_eq!(
++        fs::read(target_root.join(PROJECT_SCOPE_FILE)).expect("read preserved scope"),
++        project_scope_content(&project_cwd).expect("serialize expected scope")
++    );
++}

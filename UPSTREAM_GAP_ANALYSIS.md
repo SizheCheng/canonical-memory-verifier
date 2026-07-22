@@ -69,7 +69,20 @@ optional preflight adapter at the selected-project import boundary:
 The first upstream unit should be a focused fixture or optional hook, not this
 whole Python plugin and not the private Canonical Memories vault.
 
-## Reproduction still required
+## Executable seam proof
+
+The repository now contains a version-pinned patch and dedicated CI workflow at
+`integrations/codex-external-agent-memory-import/`. The patch prepares all
+candidate source bytes, calls a test preflight, and only then reaches the
+existing destructive replacement. Its focused negative test rejects the
+candidate and verifies that the previous `MEMORY.md` and `scope.json` remain
+byte-identical. The existing ordinary Markdown importer test is retained as a
+compatibility control.
+
+This closes only the mutation-order question. It deliberately does not expose a
+final upstream API or port the Python verifier into Codex.
+
+## Full contract reproduction still required
 
 Before posting an issue or discussion, build a version-pinned upstream test that
 demonstrates all of the following without modifying current default behavior:
@@ -82,5 +95,7 @@ demonstrates all of the following without modifying current default behavior:
   `approval_eligible: true` fail identically;
 - the prior imported project remains intact after a failed preflight.
 
-Until that test runs against the pinned Codex source, this is an evidence-backed
-design proposal, not a completed upstream reproduction.
+The narrow workflow covers ordinary compatibility and preservation after a
+generic preflight rejection. The bundle-aware digest, tamper, ambiguity, and
+authority cases remain to be wired through a real adapter before this can be
+called a completed contract reproduction or posted as an upstream proposal.

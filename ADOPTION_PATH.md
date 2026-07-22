@@ -10,19 +10,22 @@ endorsement. Before this gate the candidate needs a deliberate license, public
 repository, verified publisher identity, support material, and a current review
 against the submission rules.
 
-The local license, verified individual publisher metadata, support documents,
-reviewer cases, deterministic package builder, and cross-platform CI definition
-are now present. The remaining work at this gate is public hosting, live URLs,
-listing art, clean-checkout reproduction, portal completion, and OpenAI review.
+The license, verified individual publisher metadata, support documents,
+reviewer cases, deterministic package builder, public hosting, live URLs,
+listing art, and passing cross-platform CI are now present. The remaining work
+at this gate is independent clean-checkout reproduction, final policy and region
+selections, portal completion, and OpenAI review.
 
 ## Gate 2: upstream technical adoption
 
-First obtain one real, versioned reproduction at an actual upstream import seam,
-then publish one narrow invariant an upstream maintainer can evaluate. The
-likely upstream unit is a test, fixture, or import-boundary rule—not this entire
-application. The current synthetic verifier demo is not such an upstream
-reproduction. Start with issue analysis only after that evidence exists; prepare
-an upstream code change only when maintainers invite or request it.
+The first version-pinned seam experiment now exists at the actual Codex import
+boundary. It tests fail-before-replace preservation and ordinary Markdown
+compatibility against one exact public commit. The next technical gate is a
+bundle-aware adapter that carries the verifier's stable digest and exact failure
+classes through that seam. The likely upstream unit remains a test, fixture, or
+import-boundary rule—not this entire application. Start external discussion only
+after that evidence exists; prepare upstream production code only when
+maintainers invite or request it.
 
 ## Gate 3: collaboration, employment, or acquisition
 

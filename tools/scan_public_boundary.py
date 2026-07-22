@@ -10,7 +10,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-TEXT_SUFFIXES = {".json", ".md", ".py", ".svg", ".txt", ".yml", ".yaml"}
+TEXT_SUFFIXES = {".json", ".md", ".patch", ".py", ".svg", ".txt", ".yml", ".yaml"}
 TEXT_FILENAMES = {".gitattributes", ".gitignore", "LICENSE", "NOTICE"}
 IGNORED_DIRECTORY_NAMES = {".git"}
 PATTERNS = [

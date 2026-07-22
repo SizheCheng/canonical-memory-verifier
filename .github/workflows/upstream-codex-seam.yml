@@ -1,0 +1,59 @@
+name: upstream-codex-seam
+
+on:
+  push:
+    paths:
+      - ".github/workflows/upstream-codex-seam.yml"
+      - "integrations/codex-external-agent-memory-import/**"
+  pull_request:
+    paths:
+      - ".github/workflows/upstream-codex-seam.yml"
+      - "integrations/codex-external-agent-memory-import/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  CODEX_COMMIT: 9fc715c0861c956c894a91890b78dc05b304ba29
+
+jobs:
+  import-preflight-seam:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Check out conformance repository
+        uses: actions/checkout@v4
+
+      - name: Check out pinned OpenAI Codex source
+        uses: actions/checkout@v4
+        with:
+          repository: openai/codex
+          ref: 9fc715c0861c956c894a91890b78dc05b304ba29
+          path: upstream
+
+      - name: Prove exact upstream revision
+        shell: bash
+        run: test "$(git -C upstream rev-parse HEAD)" = "$CODEX_COMMIT"
+
+      - name: Install the upstream-pinned Rust toolchain
+        uses: dtolnay/rust-toolchain@e081816240890017053eacbb1bdf337761dc5582
+
+      - name: Check and apply the integration patch
+        shell: bash
+        run: |
+          patch_path=../integrations/codex-external-agent-memory-import/codex-import-preflight.patch
+          git -C upstream apply --check "$patch_path"
+          git -C upstream apply "$patch_path"
+
+      - name: Check Rust formatting
+        working-directory: upstream/codex-rs
+        run: cargo fmt --all -- --check
+
+      - name: Prove failed preflight preserves the previous import
+        working-directory: upstream/codex-rs
+        run: cargo test -p codex-external-agent-migration --lib preflight_failure_preserves_previous_imported_project
+
+      - name: Prove ordinary Markdown compatibility
+        working-directory: upstream/codex-rs
+        run: cargo test -p codex-external-agent-migration --lib copies_only_selected_projects_and_recopies_changed_content

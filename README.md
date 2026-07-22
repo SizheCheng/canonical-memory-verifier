@@ -1,6 +1,7 @@
 # Canonical Memory Verifier
 
 [![Conformance CI](https://github.com/SizheCheng/canonical-memory-verifier/actions/workflows/ci.yml/badge.svg)](https://github.com/SizheCheng/canonical-memory-verifier/actions/workflows/ci.yml)
+[![Pinned Codex seam](https://github.com/SizheCheng/canonical-memory-verifier/actions/workflows/upstream-codex-seam.yml/badge.svg)](https://github.com/SizheCheng/canonical-memory-verifier/actions/workflows/upstream-codex-seam.yml)
 
 <img src="assets/logo.svg" alt="Canonical Memory Verifier mark" width="96">
 
@@ -84,7 +85,8 @@ live approval and execution policy.
 
 See [SPEC.md](SPEC.md), [THREAT_MODEL.md](THREAT_MODEL.md),
 [PUBLIC_BOUNDARY.md](PUBLIC_BOUNDARY.md), [ADOPTION_PATH.md](ADOPTION_PATH.md),
-and [SUBMISSION_PACKET.md](SUBMISSION_PACKET.md).
+[SUBMISSION_PACKET.md](SUBMISSION_PACKET.md), and the
+[version-pinned Codex import seam experiment](integrations/codex-external-agent-memory-import/README.md).
 
 ## Public-review status
 
@@ -95,4 +97,8 @@ deterministic package builder are present. The public CI runs the complete
 conformance route on Windows, macOS, and Linux with Python 3.10 and 3.13.
 Validated light, dark, and composer branding assets are included. An independent
 human clean-checkout reproduction and submission through the OpenAI portal
-remain external gates. No file in this repository authorizes submitting it.
+remain external gates. A separate workflow applies a narrow fail-before-replace
+patch to an exact public Codex commit and runs both a preservation test and the
+ordinary Markdown compatibility control. That experiment is not an upstream
+contribution or OpenAI endorsement. No file in this repository authorizes
+submitting it or contacting maintainers.
