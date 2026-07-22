@@ -15,7 +15,7 @@ index 92c38aa..e13538d 100644
  pub(super) async fn import(
      codex_home: &Path,
      external_agent_home: &Path,
-@@ -283,22 +289,46 @@ fn replace_project_resources(
+@@ -283,22 +289,45 @@ fn replace_project_resources(
      project_key: &str,
      project_cwd: &Path,
      memory_files: &[&ExternalMemoryFile],
@@ -39,12 +39,12 @@ index 92c38aa..e13538d 100644
      let source_files = memory_files
          .iter()
          .map(|memory_file| {
-             fs::read(&memory_file.source_path)
+-            fs::read(&memory_file.source_path)
 -                .map(|content| (memory_file.relative_path.clone(), content))
-+                .map(|content| PreparedMemoryFile {
-+                    relative_path: memory_file.relative_path.clone(),
-+                    content,
-+                })
++            fs::read(&memory_file.source_path).map(|content| PreparedMemoryFile {
++                relative_path: memory_file.relative_path.clone(),
++                content,
++            })
          })
          .collect::<io::Result<Vec<_>>>()?;
      let scope_content = project_scope_content(project_cwd)?;
@@ -65,7 +65,7 @@ index 92c38aa..e13538d 100644
          let target_parent = target_path.parent().ok_or_else(|| {
              invalid_data_error(format!(
                  "memory target path has no parent: {}",
-@@ -306,7 +336,7 @@ fn replace_project_resources(
+@@ -306,7 +335,7 @@ fn replace_project_resources(
              ))
          })?;
          fs::create_dir_all(target_parent)?;
