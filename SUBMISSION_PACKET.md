@@ -1,6 +1,6 @@
 # Plugin submission packet
 
-Status: **LOCAL CANDIDATE — NOT SUBMITTED**
+Status: **PUBLIC SOURCE CANDIDATE — NOT SUBMITTED**
 
 This packet maps the current skills-only candidate to the OpenAI plugin
 submission form. It is a preparation record, not a policy attestation or an

@@ -1,5 +1,7 @@
 # Canonical Memory Verifier
 
+[![Conformance CI](https://github.com/SizheCheng/canonical-memory-verifier/actions/workflows/ci.yml/badge.svg)](https://github.com/SizheCheng/canonical-memory-verifier/actions/workflows/ci.yml)
+
 Canonical Memory Verifier is a clean-room, local-first candidate for one narrow
 external-memory import boundary:
 
@@ -87,8 +89,8 @@ and [SUBMISSION_PACKET.md](SUBMISSION_PACKET.md).
 The source is public at
 <https://github.com/SizheCheng/canonical-memory-verifier>. The code, license,
 publisher metadata, reviewer cases, privacy policy, terms, support policy, and
-deterministic package builder are present. Cross-platform CI must be green on
-the exact public head before a submission ZIP is prepared. Final listing art,
-an independent human clean-checkout reproduction, and submission through the
-OpenAI portal remain external gates. No file in this repository authorizes
-submitting it.
+deterministic package builder are present. The public CI runs the complete
+conformance route on Windows, macOS, and Linux with Python 3.10 and 3.13. Final
+listing art, an independent human clean-checkout reproduction, and submission
+through the OpenAI portal remain external gates. No file in this repository
+authorizes submitting it.
