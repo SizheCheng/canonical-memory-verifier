@@ -81,7 +81,7 @@ diff --git a/codex-rs/external-agent-migration/src/memory_import_tests.rs b/code
 index 9bf57f3..7d9729c 100644
 --- a/codex-rs/external-agent-migration/src/memory_import_tests.rs
 +++ b/codex-rs/external-agent-migration/src/memory_import_tests.rs
-@@ -1,7 +1,38 @@
+@@ -1,7 +1,37 @@
  use super::*;
  use pretty_assertions::assert_eq;
 +use std::process::Command;
@@ -94,15 +94,14 @@ index 9bf57f3..7d9729c 100644
 +    let python = std::env::var_os("CMV_PYTHON").unwrap_or_else(|| "python3".into());
 +    let output = Command::new(python)
 +        .arg("-B")
-+        .arg(
-+            repository_root.join("skills/verify-canonical-memory/scripts/cmverify.py"),
-+        )
++        .arg(repository_root.join("skills/verify-canonical-memory/scripts/cmverify.py"))
 +        .arg("verify")
 +        .arg(repository_root.join("fixtures").join(fixture))
 +        .output()?;
 +    let result: serde_json::Value = serde_json::from_slice(&output.stdout)
 +        .map_err(|_| invalid_data_error("cmverify did not emit strict JSON"))?;
-+    if output.status.success() && result.get("status").and_then(|value| value.as_str()) == Some("VERIFIED")
++    if output.status.success()
++        && result.get("status").and_then(|value| value.as_str()) == Some("VERIFIED")
 +    {
 +        return result
 +            .pointer("/digests/conformance_sha256")
@@ -120,7 +119,7 @@ index 9bf57f3..7d9729c 100644
  fn write_project_session(project_root: &Path, project_cwd: &Path) {
      fs::create_dir_all(project_cwd).expect("create project cwd");
      fs::write(
-@@ -333,3 +364,154 @@ fn removes_an_existing_unscoped_target_when_cwd_is_unavailable() {
+@@ -333,3 +363,154 @@ fn removes_an_existing_unscoped_target_when_cwd_is_unavailable() {
      );
      assert!(!target_root.exists());
  }
