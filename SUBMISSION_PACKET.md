@@ -21,9 +21,14 @@ authorization to submit.
 - Support: https://github.com/SizheCheng/canonical-memory-verifier/issues
 - Privacy: https://github.com/SizheCheng/canonical-memory-verifier/blob/main/PRIVACY.md
 - Terms: https://github.com/SizheCheng/canonical-memory-verifier/blob/main/TERMS.md
+- Logo: ./assets/logo.svg
+- Dark logo: ./assets/logo-dark.svg
+- Composer icon: ./assets/composer-icon.svg
+- Brand color: #17233E
 
 These live HTTPS URLs are hosted in the public repository under the matching
-publisher identity. A final production-ready logo is still required.
+publisher identity. The packaged production-ready brand assets are square,
+self-contained SVGs and are validated by the test suite.
 
 ## Skills bundle
 

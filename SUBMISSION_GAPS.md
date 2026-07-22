@@ -16,6 +16,8 @@ The local candidate is not yet ready for public submission.
 - clean public source repository under the matching GitHub identity;
 - live website, support, privacy, and terms URLs under that repository;
 - passing public Windows, macOS, and Linux CI for Python 3.10 and 3.13;
+- production listing logo, dark logo, composer icon, and brand color with
+  mechanical size, format, and external-reference checks;
 - local privacy, terms, support, security, and publisher documents;
 - strict validation of the public packaging manifest, including malicious
   manifest records and deterministic ZIP reproduction tests.
@@ -40,7 +42,7 @@ Publisher metadata and the final OpenAI submission must use that exact identity.
 These are project readiness choices, not claims about mandatory portal fields:
 
 - have a human reviewer reproduce the commands from a clean checkout;
-- finalize listing logo and confirm the prepared starter prompts;
+- confirm the prepared starter prompts;
 - inspect a final allowlisted ZIP and rerun current official checks;
 - complete the portal draft and policy attestations from live evidence.
 

@@ -28,6 +28,10 @@
     "websiteURL": "https://github.com/SizheCheng/canonical-memory-verifier",
     "privacyPolicyURL": "https://github.com/SizheCheng/canonical-memory-verifier/blob/main/PRIVACY.md",
     "termsOfServiceURL": "https://github.com/SizheCheng/canonical-memory-verifier/blob/main/TERMS.md",
+    "brandColor": "#17233E",
+    "composerIcon": "./assets/composer-icon.svg",
+    "logo": "./assets/logo.svg",
+    "logoDark": "./assets/logo-dark.svg",
     "defaultPrompt": [
       "Verify this external memory bundle before use.",
       "Trace this current claim to its sources.",

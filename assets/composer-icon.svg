@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Canonical Memory Verifier icon</title>
+  <desc id="desc">Three evidence lanes converge on one verified current head.</desc>
+  <rect width="512" height="512" rx="112" fill="#17233E"/>
+  <g fill="none" stroke="#FFFFFF" stroke-width="32" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M104 152h124c54 0 60 70 106 92l24 12"/>
+    <path d="M104 256h274"/>
+    <path d="M104 360h124c54 0 60-70 106-92l24-12"/>
+  </g>
+  <circle cx="406" cy="256" r="36" fill="#5ED6B8"/>
+</svg>
