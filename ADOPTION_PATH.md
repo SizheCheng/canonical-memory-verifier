@@ -17,6 +17,20 @@ Passing review and publication establish official directory distribution. They
 do not establish OpenAI endorsement, upstream technical adoption, employment,
 or acquisition.
 
+## Gate 1b: published runtime usability — blocked
+
+The authenticated directory entry loads, identifies developer `Sizhe Cheng`,
+shows version `0.1.0`, exposes the complete `verify-canonical-memory` skill
+instructions, and offers `Uninstall`, proving that the listing is installed in
+that ChatGPT environment.
+
+Three ChatGPT Work checks did not establish runtime usability. A directory
+starter fell back to a different connected source, the self-contained bundled
+demo did not execute, and an instruction-only control reported the curated
+plugin identity unavailable despite the installed directory state. The redacted
+observation is bound in `LIVE_SURFACE_ACCEPTANCE.json`. Root cause is not yet
+established; propagation and platform behavior remain hypotheses.
+
 ## Gate 2: upstream technical adoption
 
 The version-pinned experiment passes at the actual Codex import boundary. It
@@ -48,6 +62,14 @@ Established:
 5. privacy, secret, and public-boundary scans pass;
 6. the submitted ZIP reproduces byte-for-byte from its source commit; and
 7. OpenAI Plugins Directory version `0.1.0` is published.
+
+Still required for distribution acceptance:
+
+1. the published skill must become available to a new ChatGPT Work runtime;
+2. the bundled authority-replay demo must produce deterministic verifier output;
+   and
+3. a real explicit-input bundle case must pass without falling back to another
+   connected source.
 
 Still required before upstream contact:
 

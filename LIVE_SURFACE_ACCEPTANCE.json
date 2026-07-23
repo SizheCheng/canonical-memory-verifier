@@ -1,0 +1,51 @@
+{
+  "format_version": "1.0",
+  "plugin_id": "plugins_6a616d0d67e88191844c7fe0bb2b2ac5",
+  "package_name": "canonical-memory-verifier",
+  "version": "0.1.0",
+  "observed_at_utc": "2026-07-23T02:54:54.415Z",
+  "surface": "ChatGPT web Work mode",
+  "directory_listing": {
+    "status": "pass",
+    "developer": "Sizhe Cheng",
+    "installed": true,
+    "uninstall_action_visible": true,
+    "skill_detail_visible": true,
+    "published_skill_name": "verify-canonical-memory",
+    "published_instructions_visible": true
+  },
+  "runtime_invocation": {
+    "status": "fail",
+    "error_code": "CMV_PUBLISHED_SKILL_RUNTIME_UNAVAILABLE",
+    "root_cause_status": "not_established",
+    "cases": [
+      {
+        "case_id": "directory_starter_without_bundle",
+        "result": "wrong_capability_fallback",
+        "observation": "The plugin mention created a Work chat, but the response used a separately connected Canonical Memories source and stated that the independent verifier capability was unavailable."
+      },
+      {
+        "case_id": "bundled_authority_replay_demo",
+        "result": "failed",
+        "observation": "A self-contained request to run the bundled authority-replay demo returned only an inability response instead of deterministic verifier output."
+      },
+      {
+        "case_id": "instruction_only_control",
+        "result": "failed",
+        "observation": "The runtime reported canonical-memory-verifier@openai-curated-remote as not installed and said bundled skill instructions were not exposed, even though the directory UI showed the plugin installed and displayed the complete skill instructions."
+      }
+    ]
+  },
+  "codex_cli_marketplace_snapshot": {
+    "status": "not_present",
+    "installed_count": 11,
+    "available_count": 180,
+    "matching_entries": 0
+  },
+  "privacy": {
+    "conversation_ids_recorded": false,
+    "account_email_recorded": false,
+    "organization_id_recorded": false
+  },
+  "claim_boundary": "Directory publication, listing, installation, and visible skill metadata are established. Runtime usability is not established. The observed mismatch may be propagation or platform behavior; this record does not assign a root cause."
+}

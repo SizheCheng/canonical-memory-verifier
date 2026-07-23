@@ -103,6 +103,14 @@ Its deterministic 116,170-byte ZIP has SHA-256
 See [PUBLICATION_RECORD.json](PUBLICATION_RECORD.json) for the bounded publication
 record.
 
+The authenticated directory listing and installation UI are live, but the first
+ChatGPT Work runtime acceptance is not yet green. The installed listing exposed
+the complete bundled skill instructions while the Work runtime reported the
+curated plugin capability unavailable. See
+[LIVE_SURFACE_ACCEPTANCE.json](LIVE_SURFACE_ACCEPTANCE.json) for the redacted,
+bounded observation. Publication and installation must not be presented as
+runtime conformance.
+
 The public CI runs the conformance route on Windows, macOS, and Linux with
 Python 3.10 and 3.13. A separate workflow applies a narrow fail-before-replace
 patch to an exact public Codex commit and runs both a preservation test and the

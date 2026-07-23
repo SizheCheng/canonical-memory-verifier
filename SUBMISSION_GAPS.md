@@ -36,10 +36,18 @@ interest.
 
 ## Remaining distribution verification
 
-The portal generated the public directory URL. A clean installation and starter
-prompt run should be repeated after directory propagation and retained as user-
-visible distribution evidence. A temporary public-page loading error is not a
-reason to republish or change the submitted bundle.
+The authenticated public directory URL now loads. The listing is installed,
+shows version `0.1.0`, and displays the complete bundled skill instructions.
+However, three ChatGPT Work checks did not expose a usable published runtime:
+the directory starter fell back to a different connected source, the bundled
+demo did not execute, and an instruction-only control reported the curated
+plugin identity unavailable. `LIVE_SURFACE_ACCEPTANCE.json` preserves the
+redacted observation without chat IDs, account email, or organization ID.
+
+Do not republish or change the submitted bundle until the mismatch is separated
+from directory propagation. Recheck a new Work chat after propagation; if the
+same exact mismatch persists, report it as a platform runtime issue with the
+published plugin ID, version, observation timestamp, and redacted cases.
 
 ## Upstream Codex gate
 
