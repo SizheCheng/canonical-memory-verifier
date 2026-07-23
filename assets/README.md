@@ -8,10 +8,16 @@ a claim that the plugin establishes truth or grants execution authority.
 
 - `logo.svg`: light listing surface;
 - `logo-dark.svg`: dark listing surface;
-- `composer-icon.svg`: higher-contrast compact mark.
+- `composer-icon.svg`: higher-contrast compact mark;
+- `portal-logo-light.png`: 512x512 Plugin Directory light-mode upload;
+- `portal-logo-dark.png`: 512x512 Plugin Directory dark-mode upload;
+- `portal-composer-light.png`: 512x512 composer light-mode upload;
+- `portal-composer-dark.png`: 512x512 composer dark-mode upload.
 
-Every asset is a self-contained 512×512 UTF-8 SVG with no fonts, scripts,
-external references, embedded payloads, gradients, or raster content.
+The SVG files are self-contained 512x512 UTF-8 source assets with no fonts,
+scripts, external references, embedded payloads, gradients, or raster content.
+The PNG files are deterministic 512x512 raster exports for the OpenAI Plugin
+submission portal, which currently requires PNG listing and composer icons.
 
 ## Palette
 

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import struct
 import unittest
 import xml.etree.ElementTree as ET
 from pathlib import Path, PurePosixPath
@@ -54,13 +55,36 @@ class BrandAssetTests(unittest.TestCase):
                 self.assertNotIn("url(", value.lower())
                 self.assertNotIn("data:", value.lower())
 
-    def test_required_brand_assets_are_safe_square_svgs(self) -> None:
+    def assert_safe_square_png(self, path: Path) -> None:
+        data = path.read_bytes()
+        self.assertLessEqual(len(data), MAX_IMAGE_BYTES)
+        self.assertTrue(data.startswith(b"\x89PNG\r\n\x1a\n"))
+        self.assertGreaterEqual(len(data), 33)
+        self.assertEqual(data[12:16], b"IHDR")
+        width, height = struct.unpack(">II", data[16:24])
+        self.assertEqual(width, height)
+        self.assertGreaterEqual(width, 256)
+        self.assertLessEqual(width, MAX_DIMENSION)
+
+    def test_svg_sources_remain_safe_and_square(self) -> None:
+        for name in ("logo.svg", "logo-dark.svg", "composer-icon.svg"):
+            self.assert_safe_square_svg(ROOT / "assets" / name)
+
+    def test_manifest_brand_assets_are_portal_ready_pngs(self) -> None:
         interface = self.manifest()["interface"]
         for field in ("logo", "logoDark", "composerIcon"):
             path = self.asset_path(interface[field])
-            self.assertEqual(path.suffix, ".svg")
+            self.assertEqual(path.suffix, ".png")
             self.assertTrue(path.is_file())
-            self.assert_safe_square_svg(path)
+            self.assert_safe_square_png(path)
+
+        dark_composer = ROOT / "assets" / "portal-composer-dark.png"
+        self.assertTrue(dark_composer.is_file())
+        self.assert_safe_square_png(dark_composer)
+
+    def test_directory_subtitle_fits_live_portal_limit(self) -> None:
+        subtitle = self.manifest()["interface"]["shortDescription"]
+        self.assertLessEqual(len(subtitle), 30)
 
     def test_brand_color_matches_canonical_ink(self) -> None:
         self.assertEqual(self.manifest()["interface"]["brandColor"], "#17233E")

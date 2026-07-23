@@ -12,7 +12,7 @@ authorization to submit.
 - Plugin name: Canonical Memory Verifier
 - Developer identity: Sizhe Cheng (verified individual)
 - Category: Developer Tools
-- Short description: Verify imported memory before an agent relies on it.
+- Short description: Verify imported agent memory
 - Long description: A local, read-only verifier for source integrity, explicit
   supersession, deterministic current projection, declared source-reference
   tracing, and remembered-authority boundaries.
@@ -21,9 +21,10 @@ authorization to submit.
 - Support: https://github.com/SizheCheng/canonical-memory-verifier/issues
 - Privacy: https://github.com/SizheCheng/canonical-memory-verifier/blob/main/PRIVACY.md
 - Terms: https://github.com/SizheCheng/canonical-memory-verifier/blob/main/TERMS.md
-- Logo: ./assets/logo.svg
-- Dark logo: ./assets/logo-dark.svg
-- Composer icon: ./assets/composer-icon.svg
+- Logo: ./assets/portal-logo-light.png
+- Dark logo: ./assets/portal-logo-dark.png
+- Composer icon, light mode: ./assets/portal-composer-light.png
+- Composer icon, dark mode: ./assets/portal-composer-dark.png
 - Brand color: #17233E
 
 These live HTTPS URLs are hosted in the public repository under the matching

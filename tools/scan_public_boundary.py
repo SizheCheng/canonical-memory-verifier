@@ -13,6 +13,12 @@ ROOT = Path(__file__).resolve().parents[1]
 TEXT_SUFFIXES = {".json", ".md", ".patch", ".py", ".svg", ".txt", ".yml", ".yaml"}
 TEXT_FILENAMES = {".gitattributes", ".gitignore", "LICENSE", "NOTICE"}
 IGNORED_DIRECTORY_NAMES = {".git"}
+ALLOWED_BINARY_PATHS = {
+    "assets/portal-composer-dark.png",
+    "assets/portal-composer-light.png",
+    "assets/portal-logo-dark.png",
+    "assets/portal-logo-light.png",
+}
 PATTERNS = [
     ("absolute_windows_user_path", re.compile(r"C:" + r"\\Users\\", re.IGNORECASE)),
     ("chat_share_url", re.compile(r"chatgpt\.com/" + r"share/", re.IGNORECASE)),
@@ -49,6 +55,8 @@ def main() -> int:
             continue
         if "__pycache__" in path.parts:
             violations.append({"path": relative, "kind": "generated_cache"})
+            continue
+        if relative in ALLOWED_BINARY_PATHS:
             continue
         if path.suffix.lower() not in TEXT_SUFFIXES and path.name not in TEXT_FILENAMES:
             violations.append({"path": relative, "kind": "undeclared_binary_or_extension"})
