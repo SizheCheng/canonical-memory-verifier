@@ -5,17 +5,20 @@
 
 <img src="assets/logo.svg" alt="Canonical Memory Verifier mark" width="96">
 
-Canonical Memory Verifier is a clean-room, local-first candidate for one narrow
-external-memory import boundary:
+Canonical Memory Verifier is a clean-room, local-first verifier and published
+skills-only plugin for one narrow external-memory import boundary:
 
 > Before an agent relies on imported memory, deterministically prove which
 > claims are current, which exact declared source bytes they reference, and that
 > remembered authority cannot count as live approval.
 
-This repository is a conformance candidate, not an OpenAI product, endorsement,
-security boundary, or published plugin. It contains only synthetic data. It does
-not connect to a server, scan conversations, discover memory directories, write
-back to a vault, or execute an action described by memory.
+OpenAI Plugins Directory version `0.1.0` is published at
+<https://chatgpt.com/plugins/plugins_6a616d0d67e88191844c7fe0bb2b2ac5>.
+Directory publication establishes reviewed distribution; it does not make this
+repository an OpenAI product, endorsement, upstream integration, or security
+boundary. The repository contains only synthetic data. It does not connect to a
+server, scan conversations, discover memory directories, write back to a vault,
+or execute an action described by memory.
 
 Publisher: **Sizhe Cheng** ([GitHub identity](https://github.com/SizheCheng)).
 The code is licensed under Apache-2.0. See [PUBLISHER.md](PUBLISHER.md),
@@ -88,20 +91,27 @@ See [SPEC.md](SPEC.md), [THREAT_MODEL.md](THREAT_MODEL.md),
 [SUBMISSION_PACKET.md](SUBMISSION_PACKET.md), and the
 [version-pinned Codex import seam experiment](integrations/codex-external-agent-memory-import/README.md).
 
-## Public-review status
+## Publication and upstream status
 
-The source is public at
-<https://github.com/SizheCheng/canonical-memory-verifier>. The code, license,
-publisher metadata, reviewer cases, privacy policy, terms, support policy, and
-deterministic package builder are present. The public CI runs the complete
-conformance route on Windows, macOS, and Linux with Python 3.10 and 3.13.
-Validated light, dark, and composer branding assets are included. An independent
-human clean-checkout reproduction and submission through the OpenAI portal
-remain external gates. A separate workflow applies a narrow fail-before-replace
+OpenAI approved the submission, and Plugins Directory version `0.1.0` was
+published by the developer. The exact
+submitted source is commit
+[`3c88e4623a5f18af6f5998e6189f13b733b6b704`](https://github.com/SizheCheng/canonical-memory-verifier/commit/3c88e4623a5f18af6f5998e6189f13b733b6b704),
+released as [`v0.1.0`](https://github.com/SizheCheng/canonical-memory-verifier/releases/tag/v0.1.0).
+Its deterministic 116,170-byte ZIP has SHA-256
+`c69e85c2487259d9aa6d8cfbfb4e8f43a50c0752fa444ca2bbefa08459c6c999`.
+See [PUBLICATION_RECORD.json](PUBLICATION_RECORD.json) for the bounded publication
+record.
+
+The public CI runs the conformance route on Windows, macOS, and Linux with
+Python 3.10 and 3.13. A separate workflow applies a narrow fail-before-replace
 patch to an exact public Codex commit and runs both a preservation test and the
 ordinary Markdown compatibility control. It also passes the real verifier's
 valid digest, tamper, ambiguous-head, and two authority-eligibility cases through
 that seam. See [UPSTREAM_REPRODUCTION_EVIDENCE.md](UPSTREAM_REPRODUCTION_EVIDENCE.md)
-for exact commits, hashes, run URLs, failures, and limits. The experiment is not
-an upstream contribution or OpenAI endorsement. No file in this repository
-authorizes submitting it or contacting maintainers.
+for exact commits, hashes, run URLs, failures, and limits.
+
+An independent human clean-checkout reproduction remains a deliberate gate
+before upstream maintainer contact. The experiment is not an upstream
+contribution or OpenAI endorsement. Directory publication does not authorize a
+future submission, maintainer contact, or code contribution.

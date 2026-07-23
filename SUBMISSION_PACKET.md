@@ -1,15 +1,16 @@
 # Plugin submission packet
 
-Status: **PUBLIC SOURCE CANDIDATE — NOT SUBMITTED**
+Status: **PUBLISHED — OPENAI PLUGINS DIRECTORY VERSION 0.1.0**
 
-This packet maps the current skills-only candidate to the OpenAI plugin
-submission form. It is a preparation record, not a policy attestation or an
-authorization to submit.
+This is the historical record of the skills-only submission. It records what
+was submitted and observed; it is not a reusable policy attestation or authority
+to submit an update.
 
 ## Info
 
 - Submission type: Skills only
 - Plugin name: Canonical Memory Verifier
+- Plugin ID: plugins_6a616d0d67e88191844c7fe0bb2b2ac5
 - Developer identity: Sizhe Cheng (verified individual)
 - Category: Developer Tools
 - Short description: Verify imported agent memory
@@ -21,29 +22,32 @@ authorization to submit.
 - Support: https://github.com/SizheCheng/canonical-memory-verifier/issues
 - Privacy: https://github.com/SizheCheng/canonical-memory-verifier/blob/main/PRIVACY.md
 - Terms: https://github.com/SizheCheng/canonical-memory-verifier/blob/main/TERMS.md
-- Logo: ./assets/portal-logo-light.png
-- Dark logo: ./assets/portal-logo-dark.png
-- Composer icon, light mode: ./assets/portal-composer-light.png
-- Composer icon, dark mode: ./assets/portal-composer-dark.png
+- Directory: https://chatgpt.com/plugins/plugins_6a616d0d67e88191844c7fe0bb2b2ac5
+- Directory logo, light slot: ./assets/portal-logo-light.png
+- Directory logo, dark slot: ./assets/portal-logo-dark.png
+- Composer icon, light slot: ./assets/portal-composer-dark.png
+- Composer icon, dark slot: ./assets/portal-composer-light.png
 - Brand color: #17233E
 
-These live HTTPS URLs are hosted in the public repository under the matching
-publisher identity. The packaged production-ready brand assets are square,
-self-contained SVGs and are validated by the test suite.
+The Composer filenames predate the portal upload and are visually reversed: the
+file named `portal-composer-dark.png` has the light background, while the file
+named `portal-composer-light.png` has the dark background. The slot mapping
+above records the actual submitted appearance.
 
-## Skills bundle
+## Submitted skills bundle
 
-Upload one ZIP no larger than 100 MB with this repository as the single plugin
-root. The final ZIP must include `.codex-plugin/plugin.json` and
-`skills/verify-canonical-memory/SKILL.md` and must not include an MCP or app
-reference. Build it with:
+The exact submitted source is commit
+`3c88e4623a5f18af6f5998e6189f13b733b6b704`. The deterministic submitted ZIP is
+116,170 bytes with SHA-256
+`c69e85c2487259d9aa6d8cfbfb4e8f43a50c0752fa444ca2bbefa08459c6c999`.
+It is attached to:
 
-```text
-python tools/build_candidate_zip.py --output path/to/canonical-memory-verifier.zip
-```
+- https://github.com/SizheCheng/canonical-memory-verifier/releases/tag/v0.1.0
 
-The build result intentionally reports `submission_authorized: false`; that
-field records package provenance and does not attempt to control the portal.
+The package contains `.codex-plugin/plugin.json` and
+`skills/verify-canonical-memory/SKILL.md`, with no MCP or app reference. The
+package builder reports `submission_authorized: false` because repository bytes
+cannot grant portal authority.
 
 ## Starter prompts
 
@@ -51,16 +55,17 @@ field records package provenance and does not attempt to control the portal.
 2. Trace this current claim to its sources.
 3. Check this bundle for remembered-authority replay.
 
-## Tests
+## Reviewer tests
 
-Use exactly the five positive and three negative cases in
+The submission used the five positive and three negative cases in
 `REVIEWER_TESTS.md`. Every case uses bundled synthetic data and requires no
 account, network, credential, private context, MFA, email, or SMS.
 
 ## Availability
 
-Country and region availability has not been selected. It should be chosen only
-after the support process and public legal pages are live for those locations.
+The portal accepted and published the version. This repository does not claim a
+specific country list because the exact selected portal region set is not part
+of the exported source packet.
 
 ## Initial release notes
 
@@ -71,13 +76,10 @@ heads, and the invariant that remembered authority cannot satisfy live
 approval. It uses only Python's standard library, contains only synthetic
 fixtures, does not operate a server, and does not write to the selected bundle.
 
-## Final portal gate
+## Observed portal result
 
-Before `Submit for Review`, confirm from the live candidate and portal that:
-
-- the upload is the final inspected ZIP and remains under 100 MB;
-- plugin and skill validators pass on the exact uploaded tree;
-- the five positive and three negative reviewer cases reproduce cleanly;
-- the publisher identity and all public URLs match Sizhe Cheng;
-- listing art is final and owned by the publisher;
-- all policy attestations are accurate for this exact version.
+- skill validation: `Passed`;
+- review status: `Approved`;
+- publication status: `Published`;
+- public directory URL generated by the portal; and
+- no claim of OpenAI endorsement or upstream technical adoption.

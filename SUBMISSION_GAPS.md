@@ -1,73 +1,62 @@
-# Submission and adoption gaps
+# Publication and adoption gaps
 
-The local candidate is not yet ready for public submission.
+OpenAI Plugins Directory version `0.1.0` is published. This file now separates
+completed reviewed distribution from the remaining technical-adoption gates.
 
-## Established locally
+## Established and published
 
 - one plugin root with `.codex-plugin/plugin.json`;
 - one narrow, explicit-input skill;
-- standard-library-only read-only verifier;
+- a standard-library-only read-only verifier;
 - exactly five positive and three negative reviewer cases;
 - deterministic synthetic fixtures;
-- local validators and behavior, Unicode, graph, path, inventory, and privacy
-  tests;
-- one OpenClaw `main` model-assisted code review, followed by local remediation.
-- Apache-2.0 license and individual publisher metadata for Sizhe Cheng;
-- clean public source repository under the matching GitHub identity;
-- live website, support, privacy, and terms URLs under that repository;
-- passing public Windows, macOS, and Linux CI for Python 3.10 and 3.13;
-- production listing logo, dark logo, composer icon, and brand color with
-  mechanical size, format, and external-reference checks;
-- local privacy, terms, support, security, and publisher documents;
-- strict validation of the public packaging manifest, including malicious
-  manifest records and deterministic ZIP reproduction tests.
+- local behavior, Unicode, graph, path, inventory, privacy, and package tests;
+- Apache-2.0 licensing and verified individual publisher **Sizhe Cheng**;
+- public website, support, privacy, and terms URLs under the matching identity;
+- passing Windows, macOS, and Linux CI for Python 3.10 and 3.13;
+- production listing assets and starter prompts;
+- a portal scan result of `Passed` for `verify-canonical-memory`;
+- OpenAI approval followed by developer publication of Plugins Directory
+  version `0.1.0`; and
+- public GitHub release `v0.1.0` with the exact submitted ZIP.
 
-This is not an independent security audit, external validation, or OpenAI
-review.
+The submitted source commit is
+`3c88e4623a5f18af6f5998e6189f13b733b6b704`. The 116,170-byte submitted ZIP has
+SHA-256
+`c69e85c2487259d9aa6d8cfbfb4e8f43a50c0752fa444ca2bbefa08459c6c999`.
+`PUBLICATION_RECORD.json` binds these facts and the directory URL.
 
-## Current documented portal requirements
+`PUBLIC_MANIFEST.json` retains `candidate_licensed_not_published` as the local
+package-builder posture. It prevents a repository file from pretending to grant
+submission authority; it is not the live portal status.
 
-The current official submission documentation permits a skills-only ZIP and
-requires a verified individual or business identity, one plugin root, a ZIP no
-larger than 100 MB, and exactly five positive plus three negative tests. Listing
-and support information must be completed in the submission flow.
+Directory publication is reviewed distribution, not an independent security
+audit, OpenAI endorsement, upstream Codex adoption, or evidence of acquisition
+interest.
 
-- https://learn.chatgpt.com/docs/submit-plugins
+## Remaining distribution verification
 
-The intended publisher is the verified individual identity **Sizhe Cheng**.
-Publisher metadata and the final OpenAI submission must use that exact identity.
+The portal generated the public directory URL. A clean installation and starter
+prompt run should be repeated after directory propagation and retained as user-
+visible distribution evidence. A temporary public-page loading error is not a
+reason to republish or change the submitted bundle.
 
-## Self-imposed strategic readiness gates
+## Upstream Codex gate
 
-These are project readiness choices, not claims about mandatory portal fields:
-
-- have a human reviewer reproduce the commands from a clean checkout;
-- confirm the prepared starter prompts;
-- inspect a final allowlisted ZIP and rerun current official checks;
-- complete the portal draft and policy attestations from live evidence.
-
-## Upstream Codex evidence gap
-
-A live import seam has now been verified in public `openai/codex` source at
-commit `9fc715c0861c956c894a91890b78dc05b304ba29`. The feature is under development
-and disabled by default. A narrow version-pinned patch now exercises the Rust
-mutation boundary with the real verifier: valid input returns a stable digest;
-tamper, ambiguity, and both authority-eligibility cases reject before
-replacement; the prior imported project remains intact; and the existing
-ordinary Markdown import passes as a compatibility control. Exact green-run
-evidence is in `UPSTREAM_REPRODUCTION_EVIDENCE.md`.
+A live import seam was verified in public `openai/codex` source at commit
+`9fc715c0861c956c894a91890b78dc05b304ba29`. The feature was under development
+and disabled by default at that pinned revision. The exact green-run evidence is
+in `UPSTREAM_REPRODUCTION_EVIDENCE.md`.
 
 Before upstream contact:
 
-- obtain an independent clean-checkout reproduction of the bundle-aware
-  experiment and retain ordinary Markdown as the compatibility baseline;
-- distinguish observed behavior from proposed invariant;
-- publish a reproducible artifact only with separate authorization;
-- begin with an issue or discussion, not an unsolicited pull request;
-- prepare code only if maintainers invite or request it.
+- obtain an independent human clean-checkout reproduction of the bundle-aware
+  experiment while retaining ordinary Markdown as the compatibility baseline;
+- refresh observed upstream behavior against then-current public source;
+- distinguish observed behavior from the proposed invariant;
+- begin with an issue or discussion, not an unsolicited pull request; and
+- prepare production code only if maintainers invite or request it.
 
-The current Codex contribution guide says external code contributions are by
-invitation and asks contributors to start with an issue, analysis, and
-reproduction:
+The current contribution guide is:
 
 - https://github.com/openai/codex/blob/main/docs/contributing.md
